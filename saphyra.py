@@ -61,24 +61,24 @@ class Saphyra(object):
 
     def exit(self):
         self.stats()
-        print "Shutting down Saphyra"
+        print("Shutting down Saphyra")
 
     def __del__(self):
         self.exit()
 
     def printHeader(self):
 
-        print
-        print
+        print()
+        print()
 
     # Do the fun!
     def fire(self):
 
         self.printHeader()
-        print "MODE: '{0}' - WORKERS: {1}  - CONNECTIONS: {2} ".format(self.method, self.nr_workers, self.nr_sockets)
+        print("MODE: '{0}' - WORKERS: {1}  - CONNECTIONS: {2} ".format(self.method, self.nr_workers, self.nr_sockets))
 
         if DEBUG:
-            print "Starting {0} concurrent workers".format(self.nr_workers)
+            print("Starting {0} concurrent workers".format(self.nr_workers))
 
         # Start workers
         for i in range(int(self.nr_workers)):
@@ -96,7 +96,7 @@ class Saphyra(object):
                 pass 
 
         if DEBUG:
-            print "Initiating monitor"
+            print("Initiating monitor")
         self.monitor()
 
     def stats(self):
@@ -104,10 +104,10 @@ class Saphyra(object):
         try:
             if self.counter[0] > 0 or self.counter[1] > 0:
 
-                print "{0} Saphyra strikes deferred. ({1} Failed)".format(self.counter[0], self.counter[1])
+                print("{0} Saphyra strikes deferred. ({1} Failed)".format(self.counter[0], self.counter[1]))
 
                 if self.counter[0] > 0 and self.counter[1] > 0 and self.last_counter[0] == self.counter[0] and self.counter[1] > self.last_counter[1]:
-                    print "\tServer may be DOWN!"
+                    print("\tServer may be DOWN!")
     
                 self.last_counter[0] = self.counter[0]
                 self.last_counter[1] = self.counter[1]
@@ -130,7 +130,7 @@ class Saphyra(object):
                 for worker in self.workersQueue:
                     try:
                         if DEBUG:
-                            print "Killing worker {0}".format(worker.name)
+                            print("Killing worker {0}".format(worker.name))
                         #worker.terminate()
                         worker.stop()
                     except Exception, ex:
@@ -222,7 +222,7 @@ class Striker(Process):
     def run(self):
 
         if DEBUG:
-            print "Starting worker {0}".format(self.name)
+            print("Starting worker {0}".format(self.name))
 
         while self.runnable:
 
@@ -260,7 +260,7 @@ class Striker(Process):
                     pass # silently ignore
 
         if DEBUG:
-            print "Worker {0} completed run. Sleeping...".format(self.name)
+            print("Worker {0} completed run. Sleeping...".format(self.name))
             
     def closeConnections(self):
         for conn in self.socks:
@@ -441,9 +441,9 @@ class Striker(Process):
             pass
         
 def usage():
-	print 'Usage: Saphyra (url)'
-	print 'Example: Saphyra.py http://luthi.co.il/'
-	print "\a"
+	print('Usage: Saphyra (url)')
+	print ('Example: Saphyra.py http://luthi.co.il/')
+	print ("\a")
 print \
 """
 
